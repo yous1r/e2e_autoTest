@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { getConfig } from '../config/base';
+import { getConfig } from '../../config/base';
 
 const { baseURL } = getConfig();
 
@@ -19,7 +19,7 @@ test.describe('登录页', () => {
   test('用户名密码都为空，预期展示报错信息', async ({ page }) => {
     const submit = page.getByRole('button', { name: '登录' });
 
-    await submit.click({ timeout: 3000 });
+    await submit.click();
 
     const error_username = page.locator('#loginForm > div:nth-child(3) > span');
     const error_password = page.locator('#loginForm > div:nth-child(4) > span');
@@ -46,7 +46,7 @@ test.describe('登录页', () => {
       // const err = await page.locator('#loginForm > div:nth-child(4) > span');
       // console.log(err); // Issue console.log inside the page
     });
-    await page.pause();
+    // await page.pause();
 
     const error_username = page.locator('#loginForm > div:nth-child(3) > span');
 
@@ -89,18 +89,32 @@ test.describe('登录页', () => {
 
     await expect(page).toHaveURL(/dashboard/);
 
-    await page.pause();
+    /**
+     * 测试登出
+     */
 
-    // const user_ele = page.locator('#dropdown-user');
+    page.waitForSelector('#dropdown-user');
 
-    // await user_ele.hover();
+    const user_ele = page.locator('#dropdown-user');
 
-    // await expect(user_ele).toHaveClass(/open/);
+    await user_ele.hover();
 
-    // await page
-    //   .locator('#dropdown-user > div > div.pad-all.text-right > a')
-    //   .click();
+    await expect(user_ele).toHaveClass(/open/);
 
-    // await expect(page).toHaveURL(/accounts\/login/);
+    await page
+      .locator('#dropdown-user > div > div.pad-all.text-right > a')
+      .click();
+
+    await expect(page).toHaveURL(/accounts\/login/);
+  });
+
+  test('预期报错，演示', async ({ page }) => {
+    await page.getByPlaceholder('用户名').fill('admin');
+    await page.getByPlaceholder('密码').fill('111');
+    const submit = page.getByRole('button', { name: '登录' });
+
+    await submit.click();
+
+    await expect(page).toHaveURL(/dashboard/);
   });
 });

@@ -1,0 +1,35 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('http://10.2.69.242/accounts/login/?next=/');
+  await page.getByPlaceholder('用户名').click();
+  await page.getByPlaceholder('用户名').fill('admin');
+  await page.getByRole('button', { name: '登录' }).click();
+  await page.getByPlaceholder('用户名').click();
+  await page.getByPlaceholder('密码').click();
+  await page.getByPlaceholder('密码').fill('111');
+  await page.getByRole('button', { name: '登录' }).click();
+  await page.getByPlaceholder('用户名').click();
+  await page.getByPlaceholder('用户名').fill('admin');
+  await page.getByPlaceholder('用户名').press('Tab');
+  await page.getByPlaceholder('密码').fill('1');
+  await page.getByRole('button', { name: '登录' }).click();
+  await page.getByRole('link', { name: ' 运维管理' }).click();
+  await page.getByRole('link', { name: '日常运维' }).click();
+  await page.getByRole('link', { name: ' 运维管理' }).click();
+  await page.getByRole('link', { name: ' 应用管理' }).click();
+  await page.getByRole('link', { name: ' 应用管理' }).click();
+  await page.getByRole('link', { name: ' 应用管理' }).click();
+  await page.getByRole('link', { name: ' 应用管理' }).click();
+  await page.getByRole('link', { name: ' 特殊场景' }).click();
+  await page.getByRole('link', { name: ' 特殊场景' }).click();
+  await page.getByRole('link', { name: ' 系统管理' }).click();
+  await page.getByRole('link', { name: ' 系统管理' }).click();
+  await page.getByRole('link', { name: ' 系统管理' }).click();
+  await page.getByRole('link', { name: ' 系统管理' }).click();
+  await page.getByRole('link', { name: 'Profile Picture admin' }).click();
+  await page.getByRole('link', { name: 'Profile Picture admin' }).click();
+  const page1Promise = page.waitForEvent('popup');
+  await page.getByRole('link', { name: ' 帮助文档' }).click();
+  const page1 = await page1Promise;
+});

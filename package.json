@@ -5,13 +5,16 @@
   "main": "index.js",
   "scripts": {
     "genCode": "playwright codegen http://10.2.69.242",
-    "test": "playwright test"
+    "test:login": "playwright test -c playwright.base.config.ts --project=Login",
+    "test:other": "playwright test -c playwright.config.ts --project=other",
+    "test:pom": "playwright test -c playwright.config.ts --project=other --list",
+    "test": "npm run test:login && npm run test:other"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.29.2",
+    "@playwright/test": "^1.30.0",
     "@types/node": "^18.11.18",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@typescript-eslint/parser": "^5.48.2",

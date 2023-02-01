@@ -1,4 +1,3 @@
-//UI交互层代码
 import { expect, Locator, Page } from '@playwright/test';
 
 export class PlaywrightDevPage {
@@ -19,11 +18,7 @@ export class PlaywrightDevPage {
   }
 
   async goto() {
-    await this.page.goto('http://10.2.242.69');
-  }
-
-  async isTitleRight() {
-    await expect(this.page.title()).toEqual('登录页');
+    await this.page.goto('https://playwright.dev', { timeout: 60 * 1000 });
   }
 
   async getStarted() {
