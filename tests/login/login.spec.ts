@@ -13,24 +13,28 @@ test.describe('登录页', () => {
     await expect(response).toBeOK();
   });
   test('检查登录页title是否为登录页', async ({ page }) => {
-    await expect(page).toHaveTitle(/^登录页$/);
+    await expect.soft(page).toHaveTitle(/^登录页$/);
   });
 
   test('用户名密码都为空，预期展示报错信息', async ({ page }) => {
-    const submit = page.getByRole('button', { name: '登录' });
+    const submit = page.locator('//*[@id="submit_btn"]');
+    // const submit = page.getByRole('button', { name: '登录' });
 
     await submit.click();
 
     const error_username = page.locator('#loginForm > div:nth-child(3) > span');
     const error_password = page.locator('#loginForm > div:nth-child(4) > span');
 
-    await expect(error_username, '用户名为空提示错误').toBeVisible();
+    await expect.soft(error_username, '用户名为空提示错误').toBeVisible();
 
-    await expect(error_password, '用户名为空提示错误').toBeVisible();
+    await expect.soft(error_password, '用户名为空提示错误').toBeVisible();
 
-    await expect(error_username).toContainText(/^This field is required.$/);
-
-    await expect(error_password).toContainText(/^This field is required.$/);
+    await expect
+      .soft(error_username)
+      .toContainText(/^This field is required.$/);
+    await expect
+      .soft(error_password)
+      .toContainText(/^This field is required.$/);
   });
 
   test('用户名为空，预期展示报错信息：用户名不能为空', async ({ page }) => {
@@ -50,7 +54,9 @@ test.describe('登录页', () => {
 
     const error_username = page.locator('#loginForm > div:nth-child(3) > span');
 
-    await expect(error_username).toContainText(/^This field is required.$/);
+    await expect
+      .soft(error_username)
+      .toContainText(/^This field is required.$/);
   });
 
   test('密码为空，预期展示报错信息：密码不能为空', async ({ page }) => {
@@ -62,7 +68,9 @@ test.describe('登录页', () => {
 
     const error_password = page.locator('#loginForm > div:nth-child(4) > span');
 
-    await expect(error_password).toContainText(/^This field is required.$/);
+    await expect
+      .soft(error_password)
+      .toContainText(/^This field is required.$/);
   });
 
   test('用户名与密码不匹配，预期展示登录错误', async ({ page }) => {
@@ -76,7 +84,7 @@ test.describe('登录页', () => {
       'body > div > div.login > div.alert.alert-danger'
     );
 
-    await expect(error_alert).toContainText('登录失败，请重试.');
+    await expect.soft(error_alert).toContainText('登录失败，请重试.');
   });
 
   test('预期登录成功，并能退出登录', async ({ page }) => {
@@ -99,13 +107,13 @@ test.describe('登录页', () => {
 
     await user_ele.hover();
 
-    await expect(user_ele).toHaveClass(/open/);
+    await expect.soft(user_ele).toHaveClass(/open/);
 
     await page
       .locator('#dropdown-user > div > div.pad-all.text-right > a')
       .click();
 
-    await expect(page).toHaveURL(/accounts\/login/);
+    await expect.soft(page).toHaveURL(/accounts\/login/);
   });
 
   test('预期报错，演示', async ({ page }) => {
@@ -115,6 +123,6 @@ test.describe('登录页', () => {
 
     await submit.click();
 
-    await expect(page).toHaveURL(/dashboard/);
+    await expect.soft(page).toHaveURL(/dashboard/);
   });
 });

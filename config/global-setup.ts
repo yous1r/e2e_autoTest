@@ -16,7 +16,8 @@ async function globalSetup(config: FullConfig) {
 
   try {
     await context.tracing.start({ screenshots: true, snapshots: true });
-    console.log(baseURL);
+    console.log('baseURL: >>> ', baseURL);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     await page.goto(baseURL!);
     await page.getByPlaceholder('用户名').fill('admin');
     await page.getByPlaceholder('密码').fill('1');

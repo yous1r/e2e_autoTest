@@ -1,7 +1,6 @@
-import os from 'os';
-import fs from 'fs';
-import { BrowserContext } from '@playwright/test';
-import { Cookie } from '../types/Config';
+import * as os from 'os';
+import * as path from 'path';
+
 /** * 判断操作系统决定lanuch条件 * @returns */
 export function judgeSystem() {
   const osType = os.type();
@@ -25,12 +24,9 @@ export function judgeSystem() {
 const baseURL = 'http://10.2.69.242' as const;
 
 class Config {
-  baseURL = baseURL;
-  context: BrowserContext;
-
-  add_cookie(cookie: Cookie[]) {
-    this.context.addCookies(cookie);
-  }
+  readonly rootPATH = path.join(__dirname, '..');
+  readonly baseURL = baseURL;
+  context = { fileName: { sheetNames: [] } };
 }
 
 export function getConfig() {

@@ -1,17 +1,21 @@
 {
-  "name": "playwright",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "uniadmin/e2e",
+  "version": "0.0.1-alpha",
+  "description": "uniadminweb e2e autotest",
   "scripts": {
-    "genCode": "playwright codegen http://10.2.69.242",
-    "test:login": "playwright test -c playwright.base.config.ts --project=Login",
-    "test:other": "playwright test -c playwright.config.ts --project=other",
-    "test:pom": "playwright test -c playwright.config.ts --project=other --list",
-    "test": "npm run test:login && npm run test:other"
+    "genCode:remote": "playwright codegen http://10.2.69.242",
+    "genCode:local": "playwright codegen http://172.24.119.112",
+    "test:login": "playwright test -c playwright.login.config.ts --project=Login",
+    "test:others": "playwright test -c playwright.other.config.ts --project=others",
+    "test:pom": "playwright test -c playwright.other.ts --project=other --list",
+    "test": "npm run test:login & npm run test:others"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "playwright",
+    "e2e",
+    "typescript"
+  ],
+  "author": "y-xu.jinyan",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.30.0",
@@ -20,6 +24,12 @@
     "@typescript-eslint/parser": "^5.48.2",
     "eslint": "^8.32.0",
     "eslint-plugin-playwright": "^0.11.2",
-    "prettier": "^2.8.3"
+    "iconv-lite": "^0.6.3",
+    "module-alias": "^2.2.2",
+    "prettier": "^2.8.3",
+    "ts-node": "^10.9.1"
+  },
+  "dependencies": {
+    "xlsx": "file:lib/xlsx-0.19.2.tgz"
   }
 }
