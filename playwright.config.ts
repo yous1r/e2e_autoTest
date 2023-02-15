@@ -1,8 +1,6 @@
 import { defineConfig, expect, PlaywrightTestConfig } from '@playwright/test';
 import path from 'path';
-import { getConfig } from './config/base';
-
-console.log('dddd @playwright/test');
+import ctx, { getConfig } from './config/base';
 
 const { rootPATH } = getConfig();
 
@@ -16,7 +14,7 @@ const { rootPATH } = getConfig();
  * See https://playwright.dev/docs/test-configuration.
  */
 export const baseConfig: PlaywrightTestConfig = {
-  testDir: path.join(rootPATH, 'tests'),
+  testDir: path.join(ctx.rootPATH, 'src/tests'),
   /* Maximum time one test can run for. */
   // timeout: 30 * 1000,
   expect: {

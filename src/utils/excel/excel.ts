@@ -1,7 +1,7 @@
 import * as path from 'path';
 import * as fs from 'fs';
 import { readFile, writeFileAsync, utils as XL_utils, writeFile } from 'xlsx';
-import { getConfig } from '../../config/base';
+import { getConfig } from '../../../config/base';
 
 const { rootPATH } = getConfig();
 
@@ -12,36 +12,26 @@ const { rootPATH } = getConfig();
  * @param range 区间
  * @param callback 回调函数
  */
-export function readWorkbookFromLocal(
+export function readWorkbookFromLocal<T>(
   file: string,
   sheetName: string,
   range?: string,
   callback: null | (() => void) = null
-) {
+): T[] {
   // console.log(file);
 
-  const wb = readFile(file, { type: 'file' });
+  const wb = readFile(file.trim(), { type: 'file' });
   // console.log(wb);
   const sheet = wb.Sheets[sheetName];
   // console.log(XL_utils.sheet_to_json(sheet));
 
-  const ddd = [
-    {
-      TestCase_ID: 'TC_0001',
-      TestCase_Desp: '新增账号',
-      TestProcess_ID: 'TS_0001',
-      Test_Desp: '点击新增，弹出新增表单',
-      Page_URL: '/account/user',
-      Selector_Type: 'xpath',
-      Selector_Info: '//*[@id="addUserBtn"]',
-      Action_Type: 'click',
-      Check_Type: '点击',
-      Expect: '显示弹窗',
-    },
-  ];
-
-  if (typeof range === 'string') {
-    const range_area = XL_utils.decode_range(range);
+  //TODO 指定单元格数据
+  if (
+    typeof range === 'string' &&
+    range.indexOf(':') !== -1 &&
+    range.split(':').length === 2
+  ) {
+    const range_area = XL_utils.decode_range(range.trim());
 
     //循环获取单元格值
 
@@ -72,14 +62,14 @@ export function readWorkbookFromLocal(
         // if (sheet[cell]) {
         // 如果出现乱码可以使用iconv-lite进行转码
         // row_value += iconv.decode(sheet1[cell].v, 'gbk') + ", ";
-        console.log(sheet[cell]);
+        // console.log(sheet[cell]);
         sheet[cell]
           ? (rowData[sheet[header_cell]] = sheet[cell])
           : (rowData[sheet[header_cell]] = '');
       }
       // row_list.push(row_value.slice(0, row_value.length - 2));
     }
-    console.log(row_list);
+    // console.log(row_list);
 
     return row_list;
   }

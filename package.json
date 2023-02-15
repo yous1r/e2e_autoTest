@@ -7,6 +7,7 @@
     "genCode:local": "playwright codegen http://172.24.119.112",
     "test:login": "playwright test -c playwright.login.config.ts --project=Login",
     "test:others": "playwright test -c playwright.other.config.ts --project=others",
+    "test:demo": "playwright test -c playwright.other.config.ts --project=test",
     "test:pom": "playwright test -c playwright.other.ts --project=other --list",
     "test": "npm run test:login & npm run test:others"
   },
@@ -15,16 +16,19 @@
     "e2e",
     "typescript"
   ],
-  "author": "y-xu.jinyan",
+  "author": "Group of Project JIDU",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.30.0",
+    "@types/lodash": "^4.14.191",
     "@types/node": "^18.11.18",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@typescript-eslint/parser": "^5.48.2",
     "eslint": "^8.32.0",
     "eslint-plugin-playwright": "^0.11.2",
+    "eslint-plugin-prettier": "^4.2.1",
     "iconv-lite": "^0.6.3",
+    "lodash": "^4.17.21",
     "module-alias": "^2.2.2",
     "prettier": "^2.8.3",
     "ts-node": "^10.9.1"

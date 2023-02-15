@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { getConfig } from '../../config/base';
+import { getConfig } from '../../../config/base';
 
 const { baseURL } = getConfig();
 

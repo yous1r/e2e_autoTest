@@ -4,24 +4,26 @@ import { devices } from '@playwright/test';
 import { getConfig } from './config/base';
 import baseConfig from './playwright.config';
 
-const { rootPATH } = getConfig();
+const { rootPATH, testDir, context: Ctx } = getConfig();
 
-expect.extend({
-  toBeWithinRange(received: number, floor: number, ceiling: number) {
-    const pass = received >= floor && received <= ceiling;
-    if (pass) {
-      return {
-        message: () => 'passed',
-        pass: true,
-      };
-    } else {
-      return {
-        message: () => 'failed',
-        pass: false,
-      };
-    }
-  },
-});
+const { sessionDataDir } = Ctx;
+
+// expect.extend({
+//   toBeWithinRange(received: number, floor: number, ceiling: number) {
+//     const pass = received >= floor && received <= ceiling;
+//     if (pass) {
+//       return {
+//         message: () => 'passed !!!!',
+//         pass: true,
+//       };
+//     } else {
+//       return {
+//         message: () => 'failed !!!',
+//         pass: false,
+//       };
+//     }
+//   },
+// });
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -36,10 +38,11 @@ export default defineConfig({
     {
       name: 'others',
       testMatch: '**/*.spec.ts',
-      // testIgnore: 'login/*.spec.ts',
+      testIgnore: ['login/*.spec.ts', 'demo/*.spec.ts'],
       use: {
-        ...devices['Desktop Firefox'],
+        ...devices['Desktop chrome'],
         headless: true,
+        storageState: path.join(rootPATH, 'data/context/session.json'),
       },
     },
     {
@@ -48,6 +51,16 @@ export default defineConfig({
       use: {
         channel: 'msedge',
         headless: true,
+      },
+    },
+    {
+      name: 'test',
+      testDir,
+      testMatch: 'account/user.spec.ts',
+      use: {
+        ...devices['Desktop chrome'],
+        headless: true,
+        storageState: sessionDataDir,
       },
     },
   ],
