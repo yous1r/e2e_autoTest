@@ -2,10 +2,10 @@ import path from 'path';
 import * as debug from 'debug';
 import * as fs from 'fs';
 import { test as base } from '@playwright/test';
-import { getConfig } from '../../../config/base';
-import { readWorkbookFromLocal } from '../../utils/excel';
+// import { getConfig } from '../../../config/base';
+// import { readWorkbookFromLocal } from '../../utils/excel';
 
-const { rootPATH } = getConfig();
+// const { rootPATH } = getConfig();
 
 // const testCaseData = readWorkbookFromLocal(path.join(rootPATH, 'data/testCase'), );
 

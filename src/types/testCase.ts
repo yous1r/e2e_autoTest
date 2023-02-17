@@ -12,5 +12,9 @@ export interface NormalCaseKey {
   Expect_Selector_Type: string;
   Expect_Selector_Info: string;
   Expect_Action: string;
-  TestResult;
+  TestResult: string;
+}
+
+export interface PageObjectModal {
+  __init(): void;
 }

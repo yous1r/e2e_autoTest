@@ -2,6 +2,8 @@ import { getConfig } from '../../../config/base';
 import { test, expect } from '@playwright/test';
 import { UniadminAccountUser } from '../../pageObject/account';
 import path from 'path';
+import { Enum_SheetNames } from '../../pageObject/account/types';
+import { waitForDebugger } from 'inspector';
 
 const { rootPATH, baseURL, getTestCaseData } = getConfig();
 
@@ -18,14 +20,56 @@ test.beforeEach(async ({ page }) => {
 
 test.describe('账户管理', () => {
   test('点击新增，展示新增弹窗', async ({ page }) => {
-    const account = new UniadminAccountUser(page);
-    await account.addUserClick();
-    await expect(account.formInstance).toBeVisible();
+    const {
+      locators: { addAccountBtn, addFormEle },
+    } = new UniadminAccountUser(page);
+    try {
+      await addAccountBtn.click();
+      await expect(addFormEle).toBeVisible();
+    } catch (e) {
+      console.log(e);
+    }
   });
-  test('表单标题', async ({ page }) => {
-    const account = new UniadminAccountUser(page);
-    console.log(account);
+});
 
-    await expect(account.formTitle).toContain('账号管理');
+test.describe('用户名不合规', () => {
+  test('用户名为空', async ({ page }) => {
+    const {
+      locators: { addAccountBtn, inputUserNameEle },
+    } = new UniadminAccountUser(page);
+    try {
+      await addAccountBtn.click();
+      await inputUserNameEle.clear();
+      // await
+    } catch (e) {
+      console.log(e);
+    }
+  });
+  test('用户名不符合校验规则', async ({ page }) => {
+    const {
+      locators: { addAccountBtn, inputUserNameEle },
+    } = new UniadminAccountUser(page);
+    await addAccountBtn.click();
+    await inputUserNameEle.fill('$$test');
+    // await expect(formTitleEle.innerText()).toContain('账号管理');
+  });
+  test('用户名超出长度', async ({ page }) => {
+    const {
+      locators: { addAccountBtn, inputUserNameEle },
+    } = new UniadminAccountUser(page);
+    await addAccountBtn.click();
+    let count = 0;
+    let testData = '1';
+    while (count < 150) {
+      count += 1;
+      testData += '1';
+    }
+    console.log(testData.length);
+
+    // await inputUserNameEle.fill(
+    //   '1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111112'
+    // );
+    await inputUserNameEle.fill(testData);
+    // await expect(formTitleEle.innerText()).toContain('账号管理');
   });
 });

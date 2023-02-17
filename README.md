@@ -4,6 +4,10 @@
 
 Looking for Playwright for [Node.js](https://playwright.dev/docs/intro), [Python](https://playwright.dev/python/docs/intro), [.NET](https://playwright.dev/dotnet/docs/intro), or [Java](https://playwright.dev/java/docs/intro)?
 
+## 准备
+
+准备 playwright.tar
+
 ## Installation
 
 ```bash

@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import { readFile, writeFileAsync, utils as XL_utils, writeFile } from 'xlsx';
+import { readFile, utils as XL_utils, writeFile } from 'xlsx';
 import { getConfig } from '../../../config/base';
 
 const { rootPATH } = getConfig();
@@ -12,16 +12,16 @@ const { rootPATH } = getConfig();
  * @param range 区间
  * @param callback 回调函数
  */
-export function readWorkbookFromLocal<T>(
+export function readWorkbookFromLocal<T, S extends string>(
   file: string,
-  sheetName: string,
+  sheetName: S,
   range?: string,
   callback: null | (() => void) = null
 ): T[] {
   // console.log(file);
 
   const wb = readFile(file.trim(), { type: 'file' });
-  // console.log(wb);
+  // console.log('workBook', wb);
   const sheet = wb.Sheets[sheetName];
   // console.log(XL_utils.sheet_to_json(sheet));
 
@@ -35,7 +35,7 @@ export function readWorkbookFromLocal<T>(
 
     //循环获取单元格值
 
-    const row_list: unknown[] = [];
+    const row_list: T[] = [];
     for (let R = range_area.s.r; R <= range_area.e.r; ++R) {
       const rowData = {};
       // let row_value = '';
@@ -80,18 +80,6 @@ export function readWorkbookFromLocal<T>(
   return XL_utils.sheet_to_json(sheet);
 }
 
-// readWorkbookFromLocal(
-//   path.join(rootPATH, 'data/Presidents.xlsx'),
-//   'Dates',
-//   'A2:B6'
-// );
-
-// readWorkbookFromLocal(
-//   path.join(rootPATH, 'data/Presidents.xlsx'),
-//   '一',
-//   'A2:B6'
-// );
-
 /**
  *
  * @param data 需写入的数据
@@ -112,28 +100,6 @@ export function generateWorkBookByAtoA<T extends unknown[][]>(
 
   writeFile(wb, fileName);
 }
-
-const demo_data = [
-  [
-    'TestCase_ID',
-    'TestCase_Desp',
-    'TestProcess_ID',
-    'Test_Desp',
-    'Selector_Type',
-    'Selector_Info',
-    'Action_Type',
-    'Test_Data',
-    'Check_Type',
-    'Expect',
-    'Test_Result',
-  ],
-];
-
-// generateWorkBookByAtoA(
-//   demo_data,
-//   path.join(rootPATH, 'data/test.xlsx'),
-//   'name'
-// );
 
 /**
  *
@@ -169,5 +135,3 @@ export function generateWorkBookByJson(
     }
   );
 }
-
-// generateWorkBookByJson('data/json/demo.json', 'name');

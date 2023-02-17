@@ -1,14 +1,33 @@
-import { map } from 'lodash';
+import { assign, map } from 'lodash';
 import { NormalCaseKey } from '../../types';
 
-export function getHandlerData<T extends NormalCaseKey>(data: T[]) {
-  const caseId: Record<string, T> = {};
+export function getHandlerData<T extends NormalCaseKey>(
+  data: T[]
+): {
+  [k in Pick<T, 'TestCase_ID'> as string]: {
+    [k in Pick<T, 'TestProcess_ID'> as string]: T;
+  };
+} {
+  const caseData: {
+    [k in Pick<T, 'TestCase_ID'> as string]: {
+      [k in Pick<T, 'TestProcess_ID'> as string]: T;
+    };
+  } = {};
+  let prevCaseId = '';
+  let caseTestId = '';
+  let caseProcessId = '';
   map(data, (item) => {
-    map(Object.entries(item), (itemPair) => {
-      if (itemPair) {
-        caseId[[item.TestCase_ID, item.TestProcess_ID].join('_')] = { ...item };
-      }
+    // 如果是合并单元格就拿上次保存的TC_ID
+    if (item.TestCase_ID) {
+      prevCaseId = item.TestCase_ID.toLowerCase();
+    }
+    caseProcessId = item.TestProcess_ID.toLowerCase();
+    item.TestCase_ID ? (caseTestId = item.TestCase_ID.toLowerCase()) : prevCaseId;
+    caseData[caseTestId] = assign(caseData[caseTestId], {
+      [caseProcessId]: { ...item },
     });
   });
-  return caseId;
+  console.log(caseData);
+
+  return caseData;
 }

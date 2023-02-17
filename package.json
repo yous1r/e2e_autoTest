@@ -9,7 +9,8 @@
     "test:others": "playwright test -c playwright.other.config.ts --project=others",
     "test:demo": "playwright test -c playwright.other.config.ts --project=test",
     "test:pom": "playwright test -c playwright.other.ts --project=other --list",
-    "test": "npm run test:login & npm run test:others"
+    "test": "npm run test:login & npm run test:others",
+    "lint": "eslint --fix-dry-run .\\src\\**\\*.ts --quiet"
   },
   "keywords": [
     "playwright",
@@ -27,7 +28,6 @@
     "eslint": "^8.32.0",
     "eslint-plugin-playwright": "^0.11.2",
     "eslint-plugin-prettier": "^4.2.1",
-    "iconv-lite": "^0.6.3",
     "lodash": "^4.17.21",
     "module-alias": "^2.2.2",
     "prettier": "^2.8.3",
