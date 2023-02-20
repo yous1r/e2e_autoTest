@@ -2,7 +2,7 @@ import { getConfig } from '../../../config/base';
 import { test, expect } from '@playwright/test';
 import { UniadminAccountUser } from '../../pageObject/account';
 import path from 'path';
-import { waitForDebugger } from 'inspector';
+import { Enum_Case_Desp } from '../../pageObject/types';
 
 const { rootPATH, baseURL, getTestCaseData } = getConfig();
 
@@ -17,15 +17,13 @@ test.beforeEach(async ({ page }) => {
 //   await account.getStarted();
 // });
 
-test.describe('账户管理', () => {
+test.describe(Enum_Case_Desp.TC_0001, () => {
   test('点击新增，展示新增弹窗', async ({ page }) => {
     const {
       locators: { addAccountBtn, addFormEle },
     } = new UniadminAccountUser(page);
-    waitForDebugger();
     try {
       await addAccountBtn.click();
-      // await account._getEle_AddForm();
       await expect(addFormEle).toBeVisible();
     } catch (e) {
       console.log(e);
@@ -72,5 +70,11 @@ test.describe('用户名不合规', () => {
     // );
     await inputUserNameEle.fill(testData);
     // await expect(formTitleEle.innerText()).toContain('账号管理');
+  });
+});
+
+test.describe('账户管理', () => {
+  test('新增用户', async ({ page }) => {
+    const { locators } = new UniadminAccountUser(page);
   });
 });

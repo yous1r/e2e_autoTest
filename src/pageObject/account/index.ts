@@ -46,10 +46,10 @@ export class UniadminAccountUser extends BasePage<T_AccountUser> implements Page
     this._getEle_InputName();
     this._getEle_InputPwd();
     this._getEle_InputPwd2();
-    // this._getEle_InputNameError();
-    // this._getEle_SubmitFormBtn();
-    // this._getEle_InputPwdError();
-    // this._getEle_InputPwd2Error();
+    this._getEle_InputNameError();
+    this._getEle_SubmitFormBtn();
+    this._getEle_InputPwdError();
+    this._getEle_InputPwd2Error();
   }
 
   async getStarted() {
@@ -75,7 +75,7 @@ export class UniadminAccountUser extends BasePage<T_AccountUser> implements Page
   _getEle_InputName() {
     this.$$genLocator<Enum_TargetEle[number], Enum_CaseIds[number]>(
       Enum_TargetEle.InputUserName,
-      Enum_CaseIds.tc_0002$$ts_0001,
+      Enum_CaseIds.tc_0003$$ts_0001,
       Enum_Selector_Type.XPATH,
       Enum_Excel_Header.SelectorInfo
     );
@@ -96,7 +96,6 @@ export class UniadminAccountUser extends BasePage<T_AccountUser> implements Page
       Enum_Excel_Header.SelectorInfo
     );
   }
-
   _getEle_InputNameError() {
     this.$$genLocator<Enum_TargetEle[number], Enum_CaseIds[number]>(
       Enum_TargetEle.InputPwd,
@@ -108,7 +107,7 @@ export class UniadminAccountUser extends BasePage<T_AccountUser> implements Page
   _getEle_SubmitFormBtn() {
     this.$$genLocator<Enum_TargetEle[number], Enum_CaseIds[number]>(
       Enum_TargetEle.InputPwd,
-      Enum_CaseIds.tc_0002$$ts_0005,
+      Enum_CaseIds.tc_0002$$ts_0007,
       Enum_Selector_Type.XPATH,
       Enum_Excel_Header.SelectorInfo
     );
@@ -116,7 +115,7 @@ export class UniadminAccountUser extends BasePage<T_AccountUser> implements Page
   _getEle_InputPwdError() {
     this.$$genLocator<Enum_TargetEle[number], Enum_CaseIds[number]>(
       Enum_TargetEle.InputPwd,
-      Enum_CaseIds.tc_0002$$ts_0005,
+      Enum_CaseIds.tc_0003$$ts_0005,
       Enum_Selector_Type.XPATH,
       Enum_Excel_Header.ExpectSelectorInfo
     );
@@ -124,7 +123,23 @@ export class UniadminAccountUser extends BasePage<T_AccountUser> implements Page
   _getEle_InputPwd2Error() {
     this.$$genLocator<Enum_TargetEle[number], Enum_CaseIds[number]>(
       Enum_TargetEle.InputPwd,
+      Enum_CaseIds.tc_0003$$ts_0005,
+      Enum_Selector_Type.XPATH,
+      Enum_Excel_Header.ExpectSelectorInfo
+    );
+  }
+  _getEle_SelectionGroup() {
+    this.$$genLocator<Enum_TargetEle[number], Enum_CaseIds[number]>(
+      Enum_TargetEle.InputPwd,
       Enum_CaseIds.tc_0002$$ts_0005,
+      Enum_Selector_Type.XPATH,
+      Enum_Excel_Header.ExpectSelectorInfo
+    );
+  }
+  _getEle_SelectionBroker() {
+    this.$$genLocator<Enum_TargetEle[number], Enum_CaseIds[number]>(
+      Enum_TargetEle.InputPwd,
+      Enum_CaseIds.tc_0002$$ts_0006,
       Enum_Selector_Type.XPATH,
       Enum_Excel_Header.ExpectSelectorInfo
     );

@@ -10,8 +10,7 @@ export function judgeSystem() {
     /**macOS系统下测试浏览器的配置 */
     return {
       os: 'Mac',
-      executablePath:
-        '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', //浏览器地址 };
+      executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', //浏览器地址 };
     };
   }
   if (osType === 'Linux') {
@@ -34,9 +33,7 @@ export function judgeSystem() {
 const baseURL = 'http://127.0.0.1:8000' as const;
 const rootPATH = path.join(__dirname, '..');
 const testDir = path.join(rootPATH, 'src/tests/');
-const sessionDataDir = path.resolve(
-  path.join(rootPATH, 'data/context/session.json')
-);
+const sessionDataDir = path.resolve(path.join(rootPATH, 'data/context/session.json'));
 
 class Config {
   readonly rootPATH = rootPATH;
@@ -49,13 +46,9 @@ class Config {
     const wb = readFile(filePath, { type: 'file' });
     let fileStr!: string;
     if (judgeSystem()?.os === 'Windows') {
-      fileStr = filePath
-        .split('\\')
-        [filePath.split('\\').length - 1].split('.')[0];
+      fileStr = filePath.split('\\')[filePath.split('\\').length - 1].split('.')[0];
     } else {
-      fileStr = filePath
-        .split('/')
-        [filePath.split('/').length - 1].split('.')[0];
+      fileStr = filePath.split('/')[filePath.split('/').length - 1].split('.')[0];
     }
     // console.log(fileStr);
 
