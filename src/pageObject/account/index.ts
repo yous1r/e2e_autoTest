@@ -5,15 +5,14 @@ import { NormalCaseKey, PageObjectModal } from '../../types';
 import { Enum_Excel_Header, Enum_Selector_Type, getHandlerData, readWorkbookFromLocal } from '../../utils';
 import { BasePage } from '../base';
 import { Enum_CaseIds, Enum_SheetNames, Enum_TargetEle } from './types';
-import { merge } from 'lodash';
 
 const { rootPATH } = getConfig();
 
 type T_AccountUser = NormalCaseKey;
 
 type T_CaseData = {
-  [k in Pick<T_AccountUser, 'TestCase_ID'> as string]: {
-    [k in Pick<T_AccountUser, 'TestProcess_ID'> as string]: T_AccountUser;
+  [k in Pick<T_AccountUser, Enum_Excel_Header.TestCaseID> as string]: {
+    [k in Pick<T_AccountUser, Enum_Excel_Header.TestProcessID> as string]: T_AccountUser;
   };
 };
 
@@ -37,14 +36,20 @@ export class UniadminAccountUser extends BasePage<T_AccountUser> implements Page
 
   __init() {
     this.caseData = getHandlerData<T_AccountUser>(rawData);
+
     this.initLocators();
   }
 
   initLocators() {
     this._getEle_AddAccountBtn();
+    this._getEle_AddForm();
     this._getEle_InputName();
     this._getEle_InputPwd();
-    this._getEle_AddForm();
+    this._getEle_InputPwd2();
+    // this._getEle_InputNameError();
+    // this._getEle_SubmitFormBtn();
+    // this._getEle_InputPwdError();
+    // this._getEle_InputPwd2Error();
   }
 
   async getStarted() {
@@ -106,6 +111,22 @@ export class UniadminAccountUser extends BasePage<T_AccountUser> implements Page
       Enum_CaseIds.tc_0002$$ts_0005,
       Enum_Selector_Type.XPATH,
       Enum_Excel_Header.SelectorInfo
+    );
+  }
+  _getEle_InputPwdError() {
+    this.$$genLocator<Enum_TargetEle[number], Enum_CaseIds[number]>(
+      Enum_TargetEle.InputPwd,
+      Enum_CaseIds.tc_0002$$ts_0005,
+      Enum_Selector_Type.XPATH,
+      Enum_Excel_Header.ExpectSelectorInfo
+    );
+  }
+  _getEle_InputPwd2Error() {
+    this.$$genLocator<Enum_TargetEle[number], Enum_CaseIds[number]>(
+      Enum_TargetEle.InputPwd,
+      Enum_CaseIds.tc_0002$$ts_0005,
+      Enum_Selector_Type.XPATH,
+      Enum_Excel_Header.ExpectSelectorInfo
     );
   }
 }

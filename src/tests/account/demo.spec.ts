@@ -2,8 +2,8 @@ import path from 'path';
 import * as debug from 'debug';
 import * as fs from 'fs';
 import { test as base } from '@playwright/test';
-// import { getConfig } from '../../../config/base';
-// import { readWorkbookFromLocal } from '../../utils/excel';
+import { getConfig } from '../../../config/base';
+import { readWorkbookFromLocal } from '../../utils/excel';
 
 // const { rootPATH } = getConfig();
 
@@ -60,11 +60,7 @@ export const test = base.extend<TestOptions>({
       console.log(testInfo.status, testInfo.expectedStatus);
 
       if (testInfo.status !== testInfo.expectedStatus)
-        fs.writeFileSync(
-          testInfo.outputPath(path.join(__dirname, 'logs'), 'logs.txt'),
-          logs.join('\n'),
-          'utf8'
-        );
+        fs.writeFileSync(testInfo.outputPath(path.join(__dirname, 'logs'), 'logs.txt'), logs.join('\n'), 'utf8');
     },
     { auto: true },
   ],

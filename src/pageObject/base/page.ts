@@ -55,7 +55,7 @@ export abstract class BasePage<T extends NormalCaseKey> {
     if (caseId.indexOf('$$') === -1) {
       throw new Error('please check the caseId, something wrong with it!!');
     }
-    const caseIds = caseId.split('$$');
+    const caseIds = caseId.toLowerCase().split('$$');
     this.locators = this.locators ?? {};
     this.locators[locatorName as string] = this.$$getLocator(
       selectorType,

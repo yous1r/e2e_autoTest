@@ -30,9 +30,10 @@ const { sessionDataDir } = Ctx;
  */
 export default defineConfig({
   ...baseConfig,
-  reporter: process.env.CI
-    ? [['html', { outputFolder: './report/others', open: 'never' }]]
-    : 'line', //测试报告
+  // reporter: process.env.CI
+  //   ? [['html', { outputFolder: './report/others', open: 'never' }]]
+  //   : 'line', //测试报告
+  reporter: [['html', { outputFolder: './report/others', open: 'never' }]],
   globalSetup: require.resolve(path.join(rootPATH, 'config/global-setup.ts')),
   projects: [
     {

@@ -2,7 +2,6 @@ import { getConfig } from '../../../config/base';
 import { test, expect } from '@playwright/test';
 import { UniadminAccountUser } from '../../pageObject/account';
 import path from 'path';
-import { Enum_SheetNames } from '../../pageObject/account/types';
 import { waitForDebugger } from 'inspector';
 
 const { rootPATH, baseURL, getTestCaseData } = getConfig();
@@ -23,8 +22,10 @@ test.describe('账户管理', () => {
     const {
       locators: { addAccountBtn, addFormEle },
     } = new UniadminAccountUser(page);
+    waitForDebugger();
     try {
       await addAccountBtn.click();
+      // await account._getEle_AddForm();
       await expect(addFormEle).toBeVisible();
     } catch (e) {
       console.log(e);

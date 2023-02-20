@@ -1,16 +1,17 @@
 import { assign, map } from 'lodash';
 import { NormalCaseKey } from '../../types';
+import { Enum_Excel_Header } from '../selector';
 
 export function getHandlerData<T extends NormalCaseKey>(
   data: T[]
 ): {
-  [k in Pick<T, 'TestCase_ID'> as string]: {
-    [k in Pick<T, 'TestProcess_ID'> as string]: T;
+  [k in Pick<T, Enum_Excel_Header.TestCaseID> as string]: {
+    [k in Pick<T, Enum_Excel_Header.TestProcessID> as string]: T;
   };
 } {
   const caseData: {
-    [k in Pick<T, 'TestCase_ID'> as string]: {
-      [k in Pick<T, 'TestProcess_ID'> as string]: T;
+    [k in Pick<T, Enum_Excel_Header.TestCaseID> as string]: {
+      [k in Pick<T, Enum_Excel_Header.TestProcessID> as string]: T;
     };
   } = {};
   let prevCaseId = '';
@@ -27,7 +28,8 @@ export function getHandlerData<T extends NormalCaseKey>(
       [caseProcessId]: { ...item },
     });
   });
-  console.log(caseData);
+
+  // console.log(caseData);
 
   return caseData;
 }

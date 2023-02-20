@@ -29,12 +29,8 @@ test.describe('登录页', () => {
 
     await expect.soft(error_password, '用户名为空提示错误').toBeVisible();
 
-    await expect
-      .soft(error_username)
-      .toContainText(/^This field is required.$/);
-    await expect
-      .soft(error_password)
-      .toContainText(/^This field is required.$/);
+    await expect.soft(error_username).toContainText(/^This field is required.$/);
+    await expect.soft(error_password).toContainText(/^This field is required.$/);
   });
 
   test('用户名为空，预期展示报错信息：用户名不能为空', async ({ page }) => {
@@ -54,9 +50,7 @@ test.describe('登录页', () => {
 
     const error_username = page.locator('#loginForm > div:nth-child(3) > span');
 
-    await expect
-      .soft(error_username)
-      .toContainText(/^This field is required.$/);
+    await expect.soft(error_username).toContainText(/^This field is required.$/);
   });
 
   test('密码为空，预期展示报错信息：密码不能为空', async ({ page }) => {
@@ -68,9 +62,7 @@ test.describe('登录页', () => {
 
     const error_password = page.locator('#loginForm > div:nth-child(4) > span');
 
-    await expect
-      .soft(error_password)
-      .toContainText(/^This field is required.$/);
+    await expect.soft(error_password).toContainText(/^This field is required.$/);
   });
 
   test('用户名与密码不匹配，预期展示登录错误', async ({ page }) => {
@@ -80,9 +72,7 @@ test.describe('登录页', () => {
 
     await submit.click();
 
-    const error_alert = page.locator(
-      'body > div > div.login > div.alert.alert-danger'
-    );
+    const error_alert = page.locator('body > div > div.login > div.alert.alert-danger');
 
     await expect.soft(error_alert).toContainText('登录失败，请重试.');
   });
@@ -109,9 +99,7 @@ test.describe('登录页', () => {
 
     await expect.soft(user_ele).toHaveClass(/open/);
 
-    await page
-      .locator('#dropdown-user > div > div.pad-all.text-right > a')
-      .click();
+    await page.locator('#dropdown-user > div > div.pad-all.text-right > a').click();
 
     await expect.soft(page).toHaveURL(/accounts\/login/);
   });
