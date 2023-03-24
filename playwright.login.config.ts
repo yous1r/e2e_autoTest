@@ -3,6 +3,7 @@ import baseConfig from './playwright.config';
 
 export default defineConfig({
   ...baseConfig,
+  reporter: [['html', { outputFolder: './report/others', open: 'always', host: '0.0.0.0', port: '22222' }]],
   /* Configure projects for major browsers */
   projects: [
     {

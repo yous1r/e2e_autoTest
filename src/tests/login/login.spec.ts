@@ -29,8 +29,8 @@ test.describe('登录页', () => {
 
     await expect.soft(error_password, '用户名为空提示错误').toBeVisible();
 
-    await expect.soft(error_username).toContainText(/^This field is required.$/);
-    await expect.soft(error_password).toContainText(/^This field is required.$/);
+    await expect.soft(error_username).toContainText(/^该字段是必填项。$/);
+    await expect.soft(error_password).toContainText(/^该字段是必填项。$/);
   });
 
   test('用户名为空，预期展示报错信息：用户名不能为空', async ({ page }) => {
@@ -50,7 +50,7 @@ test.describe('登录页', () => {
 
     const error_username = page.locator('#loginForm > div:nth-child(3) > span');
 
-    await expect.soft(error_username).toContainText(/^This field is required.$/);
+    await expect.soft(error_username).toContainText(/^该字段是必填项。$/);
   });
 
   test('密码为空，预期展示报错信息：密码不能为空', async ({ page }) => {
@@ -62,7 +62,7 @@ test.describe('登录页', () => {
 
     const error_password = page.locator('#loginForm > div:nth-child(4) > span');
 
-    await expect.soft(error_password).toContainText(/^This field is required.$/);
+    await expect.soft(error_password).toContainText(/^该字段是必填项。$/);
   });
 
   test('用户名与密码不匹配，预期展示登录错误', async ({ page }) => {

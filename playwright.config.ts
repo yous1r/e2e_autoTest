@@ -37,6 +37,7 @@ export const baseConfig: PlaywrightTestConfig = {
   // reporter: [['html', { outputFolder: './report/login', open: 'never' }]], //测试报告
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    locale: 'zh-CN',
     colorScheme: 'dark',
     launchOptions: {
       headless: true,

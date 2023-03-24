@@ -38,7 +38,7 @@ export type TestOptions = {
   saveLogs: void;
 };
 
-export const test = base.extend<TestOptions>({
+const test = base.extend<TestOptions>({
   // Default value for the version.
   version: '1.0',
 

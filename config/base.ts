@@ -29,8 +29,8 @@ export function judgeSystem() {
   }
 }
 
-// const baseURL = 'http://10.2.69.242' as const;
-const baseURL = 'http://127.0.0.1:8000' as const;
+const baseURL = 'http://10.2.69.242' as const;
+// const baseURL = 'http://127.0.0.1:8000' as const;
 const rootPATH = path.join(__dirname, '..');
 const testDir = path.join(rootPATH, 'src/tests/');
 const sessionDataDir = path.resolve(path.join(rootPATH, 'data/context/session.json'));

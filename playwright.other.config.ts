@@ -33,7 +33,7 @@ export default defineConfig({
   // reporter: process.env.CI
   //   ? [['html', { outputFolder: './report/others', open: 'never' }]]
   //   : 'line', //测试报告
-  reporter: [['html', { outputFolder: './report/others', open: 'never' }]],
+  reporter: [['html', { outputFolder: './report/others', open: 'always', host: '0.0.0.0', port: '22222' }]],
   globalSetup: require.resolve(path.join(rootPATH, 'config/global-setup.ts')),
   projects: [
     {
