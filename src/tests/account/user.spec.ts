@@ -1,12 +1,9 @@
 import { getConfig } from '../../../config/base';
 import { test, expect } from '@playwright/test';
 import { UniadminAccountUser } from '../../pageObject/account';
-import path from 'path';
 import { Enum_Case_Desp } from '../../pageObject/types';
 
-const { rootPATH, baseURL, getTestCaseData } = getConfig();
-
-getTestCaseData(path.join(rootPATH, 'data/testCase.xlsx'));
+const { baseURL } = getConfig();
 
 test.beforeEach(async ({ page }) => {
   await page.goto(baseURL + '/accounts/users');

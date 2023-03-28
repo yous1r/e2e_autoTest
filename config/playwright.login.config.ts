@@ -3,12 +3,20 @@ import baseConfig from './playwright.config';
 
 export default defineConfig({
   ...baseConfig,
-  reporter: [['html', { outputFolder: './report/others', open: 'always', host: '0.0.0.0', port: '22222' }]],
+  reporter: [['html', { outputFolder: './report/others', open: 'always', host: 'localhost', port: '22222' }]],
   /* Configure projects for major browsers */
   projects: [
     {
       name: 'Login',
-      testMatch: 'login/**.spec.ts',
+      testMatch: 'login/login.spec.ts',
+      use: {
+        ...devices['Desktop Chrome'],
+        headless: true,
+      },
+    },
+    {
+      name: 'Logout',
+      testMatch: 'login/logout.spec.ts',
       use: {
         ...devices['Desktop Chrome'],
         headless: true,

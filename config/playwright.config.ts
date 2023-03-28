@@ -1,20 +1,13 @@
-import { defineConfig, expect, PlaywrightTestConfig } from '@playwright/test';
+import { defineConfig, PlaywrightTestConfig } from '@playwright/test';
 import path from 'path';
-import ctx, { getConfig } from './config/base';
+import { getConfig } from './base';
 
-const { rootPATH } = getConfig();
-
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// require('dotenv').config();
-
+const { rootPATH, env } = getConfig();
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export const baseConfig: PlaywrightTestConfig = {
-  testDir: path.join(ctx.rootPATH, 'src/tests'),
+  testDir: path.join(rootPATH, 'src/tests'),
   /* Maximum time one test can run for. */
   // timeout: 30 * 1000,
   expect: {
@@ -29,12 +22,12 @@ export const baseConfig: PlaywrightTestConfig = {
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 3 : 0,
   /* Opt out of parallel tests on CI. */
   // workers: process.env.CI ? 1 : undefined,
+  workers: 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'dot',
-  // reporter: [['html', { outputFolder: './report/login', open: 'never' }]], //测试报告
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     locale: 'zh-CN',

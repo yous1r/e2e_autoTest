@@ -3,48 +3,21 @@
   "version": "0.0.1-alpha",
   "description": "uniadminweb e2e autotest",
   "scripts": {
-    "prepare": "husky install",
     "genCode:remote": "playwright codegen http://10.2.72.1",
     "genCode:local": "playwright codegen http://172.24.119.112",
     "test:login": "playwright test -c ./config/playwright.login.config.ts --project=Login",
     "test:others": "playwright test -c ./config/playwright.other.config.ts --project=others",
     "test:demo": "playwright test -c ./config/playwright.other.config.ts --project=test",
-    "test": "npm run test:login & npm run test:others",
-    "lint": "eslint --fix .\\src\\**\\*.ts",
-    "lint-staged": "lint-staged"
+    "test": "npm run test:login & npm run test:others"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.{ts,tsx}": [
-      "prettier --write",
-      "npm run lint",
-      "git add"
-    ]
-  },
-  "keywords": [
-    "playwright",
-    "e2e",
-    "typescript"
-  ],
+  "keywords": ["playwright", "e2e", "typescript"],
   "author": "Group of Project JIDU",
   "license": "ISC",
   "devDependencies": {
     "@types/lodash": "^4.14.191",
     "@types/node": "^18.11.18",
-    "@typescript-eslint/eslint-plugin": "^5.48.2",
-    "@typescript-eslint/parser": "^5.48.2",
-    "eslint": "^8.32.0",
-    "eslint-plugin-playwright": "^0.11.2",
-    "eslint-plugin-prettier": "^4.2.1",
-    "husky": "^8.0.3",
     "is-docker": "^3.0.0",
-    "lint-staged": "^13.1.2",
     "lodash": "^4.17.21",
-    "prettier": "^2.8.3",
     "typescript": "^5.0.2"
   },
   "dependencies": {

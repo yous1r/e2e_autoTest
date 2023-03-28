@@ -1,7 +1,15 @@
 import * as os from 'os';
 import * as path from 'path';
 import { readFile } from 'xlsx';
+// import * as dotenv from 'dotenv';
+import isDocker from 'is-docker';
 import { readWorkbookFromLocal } from '../src/utils/excel/excel';
+import { BooleanMap } from '../src/types/global';
+
+// dotenv.config();
+
+process.env.OS = judgeSystem()?.os;
+process.env.CI = (isDocker() ? 1 : 0).toString(10) as BooleanMap;
 
 /** * 判断操作系统决定lanuch条件 * @returns */
 export function judgeSystem() {
@@ -29,7 +37,7 @@ export function judgeSystem() {
   }
 }
 
-const baseURL = 'http://10.2.69.242' as const;
+const baseURL = 'http://10.2.72.1' as const;
 // const baseURL = 'http://127.0.0.1:8000' as const;
 const rootPATH = path.join(__dirname, '..');
 const testDir = path.join(rootPATH, 'src/tests/');
@@ -39,23 +47,10 @@ class Config {
   readonly rootPATH = rootPATH;
   readonly testDir = testDir;
   readonly baseURL = baseURL;
+  readonly env = process.env;
   readonly context = {
     sessionDataDir,
   } as const;
-  public getTestCaseData = function (filePath: string) {
-    const wb = readFile(filePath, { type: 'file' });
-    let fileStr!: string;
-    if (judgeSystem()?.os === 'Windows') {
-      fileStr = filePath.split('\\')[filePath.split('\\').length - 1].split('.')[0];
-    } else {
-      fileStr = filePath.split('/')[filePath.split('/').length - 1].split('.')[0];
-    }
-    // console.log(fileStr);
-
-    // console.log(this, 'dddddd');
-
-    // this.context[fileStr] = { sheetsNames: wb.SheetNames };
-  };
 }
 
 const ctx = new Config();
@@ -67,4 +62,3 @@ export function getConfig() {
 }
 
 // const test = getConfig();
-// test.getTestCaseData(path.join(test.rootPATH, 'data/testCase.xlsx'));

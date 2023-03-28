@@ -6,12 +6,12 @@
 
     ## 准备
 
-    准备 playwright.tar
+    准备 playwright_v***.tar
 
     ## Installation
 
     ```bash
-    # root下
-    docker import playwright.tar playwright
-    docker run -it --ipc=host --hostname --net=host --name=e2e -v /home/autotest/Project/e2e:/home/e2e playwright /bin/bash
+    # 宿主环境
+    docker load < playwright.tar playwright
+    docker run -itd --rm --name playwright --net bridge playwright:v2 -v /path/to/host:/root/playwright/data -v /path/to/host:/root/playwright/report -v /path/to/env_file:/root/playwright
     ```

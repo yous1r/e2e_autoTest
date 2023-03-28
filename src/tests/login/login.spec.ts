@@ -9,6 +9,12 @@ test.beforeEach(async ({ page }) => {
 
 test.describe('登录页', () => {
   test('检查登录页是否正常跳转', async ({ page }) => {
+    await page.getByPlaceholder('用户名').fill('admin');
+    await page.getByPlaceholder('用户名').press('Tab');
+    await page.getByPlaceholder('密码').fill('1');
+    await page.getByRole('button', { name: '登录' }).click();
+
+    // 测试登录接口
     const response = await page.request.get(baseURL + '/accounts/login');
     await expect(response).toBeOK();
   });
